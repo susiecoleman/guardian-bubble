@@ -211,8 +211,10 @@ function jeremyTime() {
 function resetWeatherBox() {
     $("#weather_box").empty();
     $("#weather_box").append(
-        '<textarea id="weather" class="box--input_field" placeholder="Search by city... (but lets face it, it\'s probably London)"></textarea>\
-        <button class="box--submit_button" onclick="weatherForecast()">Get the forecast</button>\
+        '<form action="/weather" method="POST">\
+        <textarea name="weather" class="box--input_field" placeholder="Search by city... (but lets face it, it\'s probably London)"></textarea>\
+        <button class="box--submit_button" type="submit">Get the forecast</button>\
+        </form>\
         <h3 class="box--subheader blue interactive_box--subheader">What\'s the weather forecast?</h3>'
     );
 }
