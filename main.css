@@ -1,0 +1,167 @@
+.light_blue {
+  color: #aadce6;
+}
+
+.blue {
+  color: #005689;
+}
+
+.white {
+  color: #fff;
+}
+
+.light_grey {
+  color: #dcdcdc;
+}
+
+.grey {
+  color: #a1a5aa;
+}
+
+.dark_grey {
+  color: #333333;
+}
+
+.blue_background {
+  background-color: #005689;
+}
+
+.mid_grey_background {
+  background-color: #f6f6f6;
+}
+
+.url-no_default_style {
+  text-decoration: none;
+}
+
+body {
+  background: #005689;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.page--container-centre {
+  display: flex;
+  justify-content: center;
+}
+
+.page--item-centre {
+  max-width: 90%;
+  flex-grow: 1;
+}
+
+.page--header-font {
+  color: #aadce6;
+  text-align: right;
+  font-size: 4.5vw;
+}
+  
+.page--grid-layout {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 32.6% 32.6% 32.6%;
+  grid-gap: 1vw;
+}
+
+.grid--box-3_column_span {
+  grid-column: 1 / 4;
+}
+
+.grid--box {
+  height:100%;
+}
+
+.padding_bottom{
+  padding-bottom: 0.5vw;
+}
+
+.grid--link_box:hover {
+  background-color: #dedede;
+}
+
+.grid--gallery_box {
+  grid-column: 1/3;
+}
+
+.grid--money_box-text {
+  color: #333333;
+  background-color: #ffbb00;
+  font-style: italic;
+}
+
+.grid--interactive_box {
+  line-height: 0;
+  margin-bottom: 0.5vw;
+}
+
+.box--image-full_width_image {
+  max-width:100%;
+}
+
+.box--text-default_layout {
+  padding: 0 0.5vw;
+  margin: 0 0 0.5vw 0;
+}
+
+.box--header {
+  font-size: 2vw;
+}
+
+.box--subheader {
+  font-size: 1.7vw;
+}
+
+.box--text {
+  font-size: 1vw;
+}
+
+.box--input_field {
+  font-family: "Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+  box-sizing: border-box;
+  border: 0.1vw solid #bdbdbd;
+  height: 24vh;
+  margin-top: 0.5vw;
+  width: 100%;
+  resize: vertical;
+  color: #333;
+  font-size: 1vw;
+}
+
+.box--input_field::placeholder {
+  color: #333;
+  font-family: "Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+}
+
+.box--input_field:focus {
+  border-color: #767676;
+  outline: none;
+}
+
+.box--submit_button {
+  margin-top: 0.5vw;
+  color: #ffffff;
+  background-color: #005689;
+  border: none;
+  border-radius: 5.9vh;
+  height: 2.5vw;
+  text-decoration: none;
+  font-size: 1vw;
+  font-family: "Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+  margin-bottom: 0.5vw;
+}
+
+.box--submit_button:hover {
+  background-color: #002c59;
+}
+
+.interactive_box--subheader {
+  line-height: normal;
+  margin: 0 0 0.5vw;
+}
+
+
+
+.interactive_box--text {
+  margin: 0 0 0.5vw;
+  line-height: normal;
+}
+
