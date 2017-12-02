@@ -10,6 +10,7 @@
   "license": "GPL-3.0",
   "dependencies": {
     "query-string": "5.0.1",
-    "node-fetch": "1.7.3"
+    "node-fetch": "1.7.3",
+    "dotenv": "4.0.0"
   }
 }
