@@ -78,10 +78,6 @@ body {
   background-color: #dedede;
 }
 
-.grid--gallery_box {
-  grid-column: 1/3;
-}
-
 .grid--money_box-text {
   color: #333333;
   background-color: #ffbb00;

@@ -1,6 +1,7 @@
 var fs = require('fs');
 var url = require('url');
-var weatherForecast = require('./weather.js')
+var weatherForecast = require('./weather.js');
+var guardian = require("./guardian.js");
 
 function handler (request, response) {
     var endpoint = request.url; 
@@ -8,9 +9,17 @@ function handler (request, response) {
         sendResponse(response, "index.html", "text/html")
     } else if(endpoint.startsWith("/weather")){
         var location = url.parse(endpoint, true).query.location;
-        processWeatherRequest(response, location);
-    }
-     else if(endpoint.includes(".css")){
+        sendWeatherResponse(location, response);
+    } else if(endpoint.startsWith("/content")){
+        var params = url.parse(endpoint, true).query
+        sendGuardianResponse(params, response);
+    } else if(endpoint.startsWith("/cartoon")){
+        var params = url.parse(endpoint, true).query
+        sendGuardianCartoonResponse(params, response);
+    } else if(endpoint.startsWith("/gallery")){
+        var params = url.parse(endpoint, true).query
+        sendGuardianGalleryResponse(params, response);
+    } else if(endpoint.includes(".css")){
         sendResponse(response, endpoint, "text/css")  
     }
     else {
@@ -18,7 +27,37 @@ function handler (request, response) {
     }
 }
 
-function processWeatherRequest(response, location) {
+function sendGuardianGalleryResponse(params, response) {
+    guardian.getGuardianGallery(params)
+        .then(guardian => {
+                response.writeHead(200, {"Content-Type": "application/json"});
+                response.write(JSON.stringify(guardian));
+                response.end();
+            }
+        );
+}
+
+function sendGuardianCartoonResponse(params, response) {
+    guardian.getGuardianCartoon(params)
+        .then(guardian => {
+                response.writeHead(200, {"Content-Type": "application/json"});
+                response.write(JSON.stringify(guardian));
+                response.end();
+            }
+        );
+}
+
+function sendGuardianResponse(params, response) {
+    guardian.getGuardianContent(params)
+        .then(guardian => {
+                response.writeHead(200, {"Content-Type": "application/json"});
+                response.write(JSON.stringify(guardian));
+                response.end();
+            }
+        );
+}
+
+function sendWeatherResponse(location, response) {
     weatherForecast(location)
         .then(weather => {
             response.writeHead(200, {"Content-Type": "text/html"});

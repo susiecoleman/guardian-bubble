@@ -14,30 +14,14 @@ $(document).ready(function() {
     getPhotos();
 });
 
-function getAsset(assets) {
-    var asset = "";
-    var assetFound = false;
-    var counter = 0;
-    while(counter < assets.length && !assetFound) {
-        var currentAsset = assets[counter];
-        if(currentAsset.typeData.height >= 400) {
-            asset = currentAsset.file;
-            assetFound = true;
-        }
-        counter++;
-    }
-    return asset;
-}
-
 function getRecipe() {
     $.ajax({
-        url: "https://content.guardianapis.com/search",
-        data: {"api-key":"gnm-hackday-2017", "tag": "tone/recipes", "show-fields": "headline,thumbnail", "page-size": 1, "show-elements":"image"}
+        url: "/content",
+        data: {"tag": "tone/recipes", "show-fields": "headline,thumbnail", "page-size": 1}
     }).then(function(data) {
-        var headline = data.response.results[0].fields.headline;
-        var images = data.response.results[0].elements[0].assets;
-        var image = getAsset(images);
-        var url = data.response.results[0].webUrl;
+        var headline = data.headline;
+        var image = data.image;
+        var url = data.url;
        $("#eat_headline").text(headline);
        $("#eat_link").attr("href", url);
        $("#eat_image").attr("src", image);
@@ -46,13 +30,12 @@ function getRecipe() {
 
 function getBook() {
     $.ajax({
-        url: "https://content.guardianapis.com/search",
-        data: {"api-key":"gnm-hackday-2017", "tag": "books/series/book-of-the-day", "show-fields": "headline,thumbnail", "page-size": 1, "show-elements":"image"}
+        url: "/content",
+        data: {"tag": "books/series/book-of-the-day", "show-fields": "headline,thumbnail", "page-size": 1}
     }).then(function(data) {
-        var headline = data.response.results[0].fields.headline;
-        var images = data.response.results[0].elements[0].assets;
-        var image = getAsset(images);
-        var url = data.response.results[0].webUrl;
+        var headline = data.headline;
+        var image = data.image;
+        var url = data.url;
        $("#read_headline").text(headline);
        $("#read_link").attr("href", url);
        $("#read_image").attr("src", image);
@@ -61,13 +44,12 @@ function getBook() {
 
 function getTv() {
     $.ajax({
-        url: "https://content.guardianapis.com/search",
-        data: {"api-key":"gnm-hackday-2017", "tag": "culture/series/watchthis", "show-fields": "headline,thumbnail", "page-size": 1, "show-elements":"image"}
+        url: "/content",
+        data: {"tag": "culture/series/watchthis", "show-fields": "headline,thumbnail", "page-size": 1}
     }).then(function(data) {
-        var headline = data.response.results[0].fields.headline;
-        var images = data.response.results[0].elements[0].assets;
-        var image = getAsset(images);
-        var url = data.response.results[0].webUrl;
+        var headline = data.headline;
+        var image = data.image;
+        var url = data.url;
        $("#watch_headline").text(headline);
        $("#watch_link").attr("href", url);
        $("#watch_image").attr("src", image);
@@ -76,13 +58,12 @@ function getTv() {
 
 function getCartoon() {
     $.ajax({
-        url: "https://content.guardianapis.com/search",
-        data: {"api-key":"gnm-hackday-2017", "tag": "commentisfree/series/guardian-comment-cartoon", "show-fields": "headline,thumbnail", "page-size": 1, "show-elements":"image"}
+        url: "/cartoon",
+        data: {"tag": "commentisfree/series/guardian-comment-cartoon", "show-fields": "headline,main", "page-size": 1}
     }).then(function(data) {
-        var headline = data.response.results[0].fields.headline;
-        var images = data.response.results[0].elements[0].assets;
-        var image = getAsset(images);
-        var url = data.response.results[0].webUrl;
+        var headline = data.headline;
+        var image = data.image;
+        var url = data.url;
        $("#cartoon_headline").text(headline);
        $("#cartoon_link").attr("href", url);
        $("#cartoon_image").attr("src", image);
@@ -91,13 +72,12 @@ function getCartoon() {
 
 function getReview() {
     $.ajax({
-        url: "https://content.guardianapis.com/search",
-        data: {"api-key":"gnm-hackday-2017", "tag": "tone/reviews", "show-fields": "headline,thumbnail", "page-size": 1, "show-elements":"image"}
+        url: "/content",
+        data: {"tag": "tone/reviews", "show-fields": "headline,thumbnail", "page-size": 1}
     }).then(function(data) {
-        var headline = data.response.results[0].fields.headline;
-        var images = data.response.results[0].elements[0].assets;
-        var image = getAsset(images);
-        var url = data.response.results[0].webUrl;
+        var headline = data.headline;
+        var image = data.image;
+        var url = data.url;
        $("#do_headline").text(headline);
        $("#do_link").attr("href", url);
        $("#do_image").attr("src", image);
@@ -106,13 +86,12 @@ function getReview() {
 
 function getPodcast() {
     $.ajax({
-        url: "https://content.guardianapis.com/search",
-        data: {"api-key":"gnm-hackday-2017", "tag": "type/audio,type/podcast", "show-fields": "headline,thumbnail", "page-size": 1, "show-elements":"image"}
+        url: "/content",
+        data: {"tag": "type/audio,type/podcast", "show-fields": "headline,thumbnail", "page-size": 1}
     }).then(function(data) {
-        var headline = data.response.results[0].fields.headline;
-        var images = data.response.results[0].elements[0].assets;
-        var image = getAsset(images);
-        var url = data.response.results[0].webUrl;
+        var headline = data.headline;
+        var image = data.image;
+        var url = data.url;
        $("#podcast_headline").text(headline);
        $("#podcast_link").attr("href", url);
        $("#podcast_image").attr("src", image);
@@ -121,12 +100,13 @@ function getPodcast() {
 
 function getPhotos() {
     $.ajax({
-        url: "https://content.guardianapis.com/search",
-        data: {"api-key":"gnm-hackday-2017", "tag": "news/series/ten-best-photographs-of-the-day", "show-elements" : "image", "page-size": 1, "show-fields": "headline"}
+        url: "/gallery",
+        data: {"tag": "news/series/ten-best-photographs-of-the-day", "show-elements" : "image", "page-size": 1, "show-fields": "headline,body"}
     }).then(function(data) {
-        images = data.response.results[0].elements;
+        console.log(data);
+        images = data.images;
         numOfImages = images.length;
-        url = data.response.results[0].webUrl;
+        url = data.url;
         $("#gallery_link").attr("href", url);
         imageRotator();
         window.setInterval(imageRotator, 20000);
@@ -134,8 +114,8 @@ function getPhotos() {
 }
 
 function imageRotator() {
-    var image = images[currentImage].assets[1].file;
-    var caption = images[currentImage].assets[1].typeData.caption;
+    var image = images[currentImage].src;
+    var caption = images[currentImage].alt;
     currentImage++;
     if (currentImage >= numOfImages) {
         currentImage = 1;
