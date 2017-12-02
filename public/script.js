@@ -103,7 +103,6 @@ function getPhotos() {
         url: "/gallery",
         data: {"tag": "news/series/ten-best-photographs-of-the-day", "show-elements" : "image", "page-size": 1, "show-fields": "headline,body"}
     }).then(function(data) {
-        console.log(data);
         images = data.images;
         numOfImages = images.length;
         url = data.url;
@@ -137,43 +136,13 @@ function kathResponse() {
     var rant = $("#rant").val();
     $("#kath_box").empty();
     $.post(
-        'https://apiv2.indico.io/keywords?version=2',
+        '/kath',
         JSON.stringify({
-          'api_key': "f3e1407b9a098a62edc7fa954dc52f1d",
-          'data': rant,
-          'threshold': 0.1
+          'rant': rant
         })
-      ).then(function(keywordsResponse) {
-        var keywordsJson = $.parseJSON(keywordsResponse)
-        var word = Object.keys(keywordsJson.results)[0];
-        $.post(
-            'https://apiv2.indico.io/sentimenthq?version=2',
-            JSON.stringify({
-              'api_key': "f3e1407b9a098a62edc7fa954dc52f1d",
-              'data': rant,
-              'threshold': 0.1
-            })
-        ).then(function(emotionResponse){
-            var emotionJson = $.parseJSON(emotionResponse)
-            var emotion = emotionJson.results;
-            $("#kath_box").append('<h3 class="box--subheader blue interactive_box--subheader">Reassuring Kath Viner</h3>');
-            $("#kath_box").append('<img class="box--image-full_width_image" src="Katherine-Viner.png" />');
-            $("#kath_box").append('<p class="box--text interactive_box--text dark_grey">' + kathResponseSentence(rant, word, emotion) + '</p>');
-            $("#kath_box").append('<button class="box--submit_button box--submit_button-margin_bottom" onclick="resetKathBox()">But wait there\'s more</button>');
-        });         
+    ).then(function(data){
+        $("#kath_box").append(data);
     }); 
-}
-
-function kathResponseSentence(rant, word, emotion) {
-    var response  = "You seem passionate about " + word + ". It is great to hear about issues that are important to you."
-    if(rant.toLowerCase().indexOf("brexit") !== -1) {
-        response = "Don't even talk to me about Brexit. What a shambles."
-    } else {
-        if(emotion < 0.5) {
-            response = "You seem upset about " + word + ". This is a totally valid view and you are totally in the right.";
-        } 
-    }
-    return response;
 }
 
 function jeremyTime() {

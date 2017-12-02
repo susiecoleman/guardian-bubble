@@ -2,6 +2,7 @@ var fs = require('fs');
 var url = require('url');
 var weatherForecast = require('./weather.js');
 var guardian = require("./guardian.js");
+var kathResponse = require("./kath");
 
 function handler (request, response) {
     var endpoint = request.url; 
@@ -19,12 +20,31 @@ function handler (request, response) {
     } else if(endpoint.startsWith("/gallery")){
         var params = url.parse(endpoint, true).query
         sendGuardianGalleryResponse(params, response);
+    } else if(endpoint.startsWith("/kath")){
+        var data = '';
+        request.on('data', function (chunk) {
+            data += chunk;
+        });
+        request.on('end', function () {
+            sendKathResponse(data, response);    
+        });
     } else if(endpoint.includes(".css")){
         sendResponse(response, endpoint, "text/css")  
     }
     else {
         sendResponse(response, endpoint, "application/javascript")     
     }
+}
+
+function sendKathResponse(data, response) {
+    var json = JSON.parse(data);
+    kathResponse(json.rant).then(
+        kath => {
+            response.writeHead(200, {"Content-Type": "text/html"});
+            response.write(kath);
+            response.end();
+        }
+    );
 }
 
 function sendGuardianGalleryResponse(params, response) {
