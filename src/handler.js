@@ -1,13 +1,14 @@
 var fs = require('fs');
-var querystring = require('querystring');
+var url = require('url');
 var weatherForecast = require('./weather.js')
 
 function handler (request, response) {
-    var endpoint = request.url;
+    var endpoint = request.url; 
     if (endpoint === "/") {
         sendResponse(response, "index.html", "text/html")
-    } else if(endpoint === "/weather"){
-        processWeatherRequest(request, response);
+    } else if(endpoint.startsWith("/weather")){
+        var location = url.parse(endpoint, true).query.location;
+        processWeatherRequest(response, location);
     }
      else if(endpoint.includes(".css")){
         sendResponse(response, endpoint, "text/css")  
@@ -17,19 +18,13 @@ function handler (request, response) {
     }
 }
 
-function processWeatherRequest(request, response) {
-    var data = '';
-    request.on('data', function (dataChunk) {
-        data += dataChunk;
-    });
-    request.on('end', function () {
-        var convertedData = querystring.parse(data);
-        weatherForecast(convertedData.weather)
-            .then(weather => {
-                response.writeHead(302, {"Location": "/"});
-                response.end();
-            });
-    });
+function processWeatherRequest(response, location) {
+    weatherForecast(location)
+        .then(weather => {
+            response.writeHead(200, {"Content-Type": "text/html"});
+            response.write(weather);
+            response.end();
+        });
 }
 
 function sendResponse(response, fileName, contentType) {

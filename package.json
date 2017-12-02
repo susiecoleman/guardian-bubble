@@ -9,7 +9,7 @@
   "author": "Susie Coleman",
   "license": "GPL-3.0",
   "dependencies": {
-    "jquery": "3.2.1",
+    "query-string": "5.0.1",
     "node-fetch": "1.7.3"
   }
 }

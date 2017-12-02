@@ -211,57 +211,19 @@ function jeremyTime() {
 function resetWeatherBox() {
     $("#weather_box").empty();
     $("#weather_box").append(
-        '<form action="/weather" method="POST">\
-        <textarea name="weather" class="box--input_field" placeholder="Search by city... (but lets face it, it\'s probably London)"></textarea>\
-        <button class="box--submit_button" type="submit">Get the forecast</button>\
-        </form>\
+        '<textarea id="location" class="box--input_field" placeholder="Search by city... (but lets face it, it\'s probably London)"></textarea>\
+        <button class="box--submit_button" type="submit" onclick="weatherForecast()">Get the forecast</button>\
         <h3 class="box--subheader blue interactive_box--subheader">What\'s the weather forecast?</h3>'
     );
 }
 
 function weatherForecast() {
-    var text = $("#weather").val();
+    var location = $("#location").val();
     $("#weather_box").empty();
     $.ajax({
-        url: "http://api.openweathermap.org/data/2.5/weather",
-        data: {"APPID":"db87fcd07a11671d2eee5ce848db9459", "units":"metric", "q": text}
+        url: "/weather",
+        data: {"location": location}
     }).then(function(data){
-        var temp = data.main.temp;
-        var weatherId = data.weather[0].id;
-        var description = data.weather[0].description;
-
-        switch(true){
-            case (weatherId >= 200 && weatherId < 300):
-                description = "Thundery weather ahead fingers crossed Donald Trump is out for a round of golf."
-                break;
-            case (weatherId >= 300 && weatherId < 500):
-                description = "Drizzle is forecast. Why can't it just rain or not rain? There's already enough uncertanty with Brexit without the weather joining in."
-                break;
-            case (weatherId >= 500 && weatherId < 600):
-                description = "It's raining. The Daily Mail is blaming Europe for it but you know it's Trump's fault. It never rained when Obama was president."
-                break;
-            case (weatherId >= 600 && weatherId < 700):
-                description = "It's snowing. If you do make it into work today make sure you counteract this productivity by telling everyone about your commute in extensive detail."
-                break;
-            case (weatherId >= 700 && weatherId < 800):
-                description = "Poor visibility today. You won't be able to see very far ahead of you (just like May's Brexit negotiation team)."
-                break;
-            case (weatherId == 800):
-                description = "Today will be clear. You should probably go out for brunch. Don't forget to instagram it otherwise what's the point of going?"
-                break;
-            case (weatherId > 800 && weatherId < 900):
-                description = "Wordsworth may have wandered lonely as a cloud but there's going to be loads of clouds today so they'll have plenty of company."
-                break;
-            case (weatherId >= 900):
-                description = "Extreme weather forecast. Best to stay inside and tell people on twitter how outrageous it is people refuse to beleive in global warming."
-                break;
-            default:
-                break;
-        }
-        $("#weather_box").append('<h3 class="box--subheader blue interactive_box--subheader">' + description + '</h3>');
-        $("#weather_box").append('<h3 class="box--subheader dark_grey interactive_box--subheader">' + text + '</h3>');
-        $("#weather_box").append('<h4 class="blue box--text interactive_box--text">Temperature: ' + temp + ' <sup>o</sup>C</h4>');
-        $("#weather_box").append('<button class="box--submit_button" onclick="resetWeatherBox()">Get the forecast</button>')
-        
+        $("#weather_box").append(data);
     });
 }
