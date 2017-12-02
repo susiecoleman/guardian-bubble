@@ -8,7 +8,6 @@ function weatherForecast(location) {
     var url = "http://api.openweathermap.org/data/2.5/weather?APPID=db87fcd07a11671d2eee5ce848db9459&units=metric&q="+location;
     return fetch(url)
         .then(function(response){
-            console.log("REs"+response);
             return response.json()
         })
         .then(function(json){
