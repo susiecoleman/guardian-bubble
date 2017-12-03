@@ -6,6 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/susiecoleman/guardian-bubble.git"
+  },
   "author": "Susie Coleman",
   "license": "GPL-3.0",
   "dependencies": {
