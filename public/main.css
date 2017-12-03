@@ -162,7 +162,7 @@ body {
   line-height: normal;
 }
 
-@media (max-width : 640px) {
+@media (max-width : 700px) {
   .box--text {
     font-size: 1.7vw;
   }
