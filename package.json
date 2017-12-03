@@ -12,6 +12,9 @@
   },
   "author": "Susie Coleman",
   "license": "GPL-3.0",
+  "engines": {
+    "node": "8.9.1"
+  },
   "dependencies": {
     "query-string": "5.0.1",
     "node-fetch": "1.7.3",
