@@ -4,6 +4,6 @@ require('dotenv').config();
 
 var server = http.createServer(handler);
 
-server.listen(5000, function () {
-    console.log("Server is listening on port 5000.  Ready to accept requests!");
+server.listen(process.env.PORT || 5000, function () {
+    console.log("Server has started");
 });
