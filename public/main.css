@@ -49,10 +49,11 @@ body {
   flex-grow: 1;
 }
 
-.page--header-font {
+.page--header {
   color: #aadce6;
   text-align: right;
   font-size: 4.5vw;
+  margin-bottom: 1vw;
 }
   
 .page--grid-layout {
@@ -114,12 +115,12 @@ body {
   font-family: "Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
   box-sizing: border-box;
   border: 0.1vw solid #bdbdbd;
-  height: 24vh;
+  height: 10vw;
   margin-top: 0.5vw;
   width: 100%;
   resize: vertical;
   color: #333;
-  font-size: 1vw;
+  font-size: 1.7vw;
 }
 
 .box--input_field::placeholder {
