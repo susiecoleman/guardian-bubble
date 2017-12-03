@@ -12,6 +12,24 @@ $(document).ready(function() {
     getReview();
     getPodcast();
     getPhotos();
+
+    $("#jeremy").keypress(function(event) {
+        if (event.which == 13) {
+            jeremyTime();
+         }
+    });
+
+    $("#rant").keypress(function(event) {
+        if (event.which == 13) {
+            kathResponse();
+         }
+    });
+
+    $("#location").keypress(function(event) {
+        if (event.which == 13) {
+            weatherForecast();
+         }
+    });
 });
 
 function getRecipe() {
