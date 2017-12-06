@@ -52,6 +52,5 @@ function buildUrl(parameters) {
 
 module.exports = {
     getGuardianContent,
-    getGuardianCartoon,
     getGuardianGallery
 }
