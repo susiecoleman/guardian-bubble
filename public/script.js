@@ -8,7 +8,6 @@ $(document).ready(function() {
     getRecipe();
     getBook();
     getTv();
-    getCartoon();
     getReview();
     getPodcast();
     getPhotos();
@@ -71,20 +70,6 @@ function getTv() {
        $("#watch_headline").text(headline);
        $("#watch_link").attr("href", url);
        $("#watch_image").attr("src", image);
-    });
-}
-
-function getCartoon() {
-    $.ajax({
-        url: "/cartoon",
-        data: {"tag": "commentisfree/series/guardian-comment-cartoon", "show-fields": "headline,main", "page-size": 1}
-    }).then(function(data) {
-        var headline = data.headline;
-        var image = data.image;
-        var url = data.url;
-       $("#cartoon_headline").text(headline);
-       $("#cartoon_link").attr("href", url);
-       $("#cartoon_image").attr("src", image);
     });
 }
 

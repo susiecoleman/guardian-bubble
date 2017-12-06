@@ -14,9 +14,6 @@ function handler (request, response) {
     } else if(endpoint.startsWith("/content")){
         var params = url.parse(endpoint, true).query
         sendGuardianResponse(params, response);
-    } else if(endpoint.startsWith("/cartoon")){
-        var params = url.parse(endpoint, true).query
-        sendGuardianCartoonResponse(params, response);
     } else if(endpoint.startsWith("/gallery")){
         var params = url.parse(endpoint, true).query
         sendGuardianGalleryResponse(params, response);

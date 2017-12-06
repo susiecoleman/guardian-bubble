@@ -28,26 +28,6 @@ function getGuardianGallery(parameters) {
         });
 }
 
-function getGuardianCartoon(parameters) {
-    var url = buildUrl(parameters)
-    return fetch(url, {"URLSearchParams": parameters})
-        .then(function(response){
-            return response.json()
-        }).then(function(json){
-            var content = {}
-            content["headline"] = json.response.results[0].fields.headline;
-            content["image"] = getCartoonImage(json.response.results[0].fields.main);
-            content["url"] = json.response.results[0].webUrl;
-            getCartoonImage(json.response.results[0].fields.main);
-            return content;
-        });
-}
-
-function getCartoonImage(cartoonHtml) {
-    var $ = cheerio.load(cartoonHtml);
-    return $('img').attr('src');
-}
-
 function getGalleryImages(html) {
     var images = [];
     var $ = cheerio.load(html);
