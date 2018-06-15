@@ -8,6 +8,18 @@ Stay safe in the liberal guardian bubble.
 
 Run `npm install`
 
+Sensitive information such as API keys are stored in the `.env` file when developing locally. This file needs to contain:
+
+```
+GUARDIAN_API_KEY=key
+INDICO_API_KEY=key
+WEATHER_API_KEY=key
+```
+To allow the app to access:
+[The Guardian API](https://content.guardianapis.com)
+[Indico API](https://indico.io/docs)
+[Open Weather Map](http://api.openweathermap.org)
+
 ## Running the application
 
 Run `node server.js`
